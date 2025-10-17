@@ -1,0 +1,435 @@
+// =============================================
+// ADMIN STYLES - Admin Pages
+// =============================================
+
+@import "_base.less";
+@import "_components.less";
+
+// =============================================
+// Admin Specific Styles
+// =============================================
+// =============================================
+// Admin Layout Overrides
+// =============================================
+body {
+    overflow-x: hidden;
+}
+
+// Header and dropdown styles are now imported from _components.less
+// Only admin-specific overrides should be added here if needed
+
+.main {
+    padding: 24px 32px 0 32px;
+    flex: 1;
+    
+    .main-title {
+        font-size: 2.2rem;
+        color: @title-color;
+        margin-bottom: 30px;
+        text-align: center; 
+        font-weight: 300;
+    }
+}
+
+
+.Anzeige {
+    border-radius: 10px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.benutzer-einstellungen {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.item-einstellungen {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+
+
+
+.item-info-section {
+    background: @card-bg;
+    border: 1.5px solid @card-border;
+    border-radius: @card-radius;
+    box-shadow: @card-shadow;
+    padding: 20px;
+    min-width: 400px;
+    margin-top: 15px;
+    
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid @card-border;
+        
+        h3 {
+            color: @title-color;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        
+        .item-status {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            
+            &.active {
+                background: lighten(@success-color, 40%);
+                color: @success-color;
+                border: 1px solid @success-color;
+            }
+            
+            &.inactive {
+                background: lighten(@danger-color, 40%);
+                color: @danger-color;
+                border: 1px solid @danger-color;
+            }
+        }
+    }
+    
+    .item-details {
+        margin-bottom: 20px;
+        
+        p {
+            margin-bottom: 8px;
+        }
+    }
+    
+    .status-form {
+        margin-bottom: 20px;
+    }
+    
+    h4 {
+        color: @title-color;
+        font-size: 1.1em;
+        margin: 20px 0 10px 0;
+        padding-bottom: 5px;
+        border-bottom: 1px solid @card-border;
+    }
+}
+
+// =====================
+// Forms
+// =====================
+.admin-form {
+    margin-bottom: 20px;
+    
+    .form-row {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex: 1;
+        margin-bottom: 10px;
+        
+        label {
+            font-weight: 600;
+            color: @price-color;
+            font-size: 0.9em;
+        }
+        
+        input, select, textarea {
+            padding: 8px 10px;
+            border: 1.5px solid @card-border;
+            border-radius: 6px;
+            font-size: 1em;
+            background: white;
+            transition: all 0.3s ease;
+            
+            &:focus {
+                outline: none;
+                border-color: @icon-bg;
+                box-shadow: 0 0 0 2px rgba(209, 188, 150, 0.2);
+            }
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+    }
+}
+
+.name-bearbeiten, .status-bearbeiten, .neuer-pin {
+    .form-group {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        
+        input, select {
+            flex: 1;
+        }
+    }
+}
+
+
+.buchung-section {
+    background: @card-bg;
+    border: 1.5px solid @card-border;
+    border-radius: @card-radius;
+    box-shadow: @card-shadow;
+    padding: 20px;
+    min-width: 350px;
+    height: fit-content;
+    margin-top: 15px;
+    
+    h4 {
+        color: @title-color;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid @card-border;
+    }
+    
+    .current-balance {
+        background: lighten(@icon-bg, 15%);
+        padding: 12px;
+        border-radius: 6px;
+        margin: 15px 0;
+        text-align: center;
+        border: 1px solid @icon-bg;
+    }
+    
+    .buchung-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+}
+
+.preis-section {
+    background: @card-bg;
+    border: 2px solid @card-border;
+    border-radius: @card-radius;
+    box-shadow: @card-shadow;
+    padding: 20px;
+    min-width: 350px;
+    height: fit-content;
+    margin-top: 15px;
+    
+    h4 {
+        color: @title-color;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid @card-border;
+    }
+}
+
+
+
+.user-navigation {
+	display: flex;
+	gap: 25px;
+	width: 100%;	
+
+.list-container {
+  margin: 30px auto;
+  background: #ede5d2;
+  border: 1.5px solid #7d6c4a;
+  border-radius: 10px;
+  padding: 25px;
+  width: 100%;
+  height: fit-content;
+	
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid @border-color;
+
+
+.search {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  .search-input {
+    padding: 8px 12px;
+    border: 1.5px solid @border-color;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    width: 200px;
+  }
+}
+}
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1rem));
+  gap: 15px;
+  max-height: 600px;
+  overflow-y: auto;
+  
+.card {
+  background: white;
+  border: 1.5px solid @card-border;
+  border-radius: 8px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 5px;
+  justify-content: space-between;
+  
+  &.selected {
+    background: linear-gradient(darken(@card-bg, 5%));
+
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: @hover-shadow;
+    border-color: @card-hover;
+  }
+  .name {
+      font-weight: 600;
+      font-size: 1rem;
+      padding-bottom: 4px;
+      color: #333;
+      border-bottom: 2px solid @border-color;
+      
+    }
+  .actions {
+	  display: flex;
+	  flex-direction: row;
+	  gap: 15px;
+	  align-items: center;
+  
+  .info {
+    flex: 1;
+    .positive {
+	  color: @success-color;
+	  font-weight: 700;
+  	}
+  	.negative {
+	  color: @danger-color;
+	  font-weight: 700;
+  }
+  .status {
+	  display: flex;
+	  flex-direction: row;
+
+    .badge {
+    	Border-radius: 50%;
+    	width: 10px;
+   		height: 10px;
+    	margin-top: 4px;
+    	margin-right: 4px;
+      &.active {
+        background: @success-bg;
+        color: @success-color;
+        border: 1px solid @success-color;
+      }
+
+      &.inactive {
+        background: @error-bg;
+        color: @error-color;
+        border: 1px solid @error-color;
+      }
+    }
+    
+
+    .role, .id {
+      font-size: 0.85rem;
+      color: @border-color;
+    }
+  }
+  }
+  .form-actions {
+  	
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-end;
+  }
+}
+}
+}
+
+}}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: @border-color;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+}
+
+// =============================================
+// Pagination Styling for Admin Pages
+// =============================================
+.pagination {
+    margin: 20px 0;
+    text-align: center;
+    
+    .pagination-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        
+        .page-numbers {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            
+            .page-number {
+                display: inline-block;
+                padding: 8px 12px;
+                background: @card-bg;
+                border: 1px solid @card-border;
+                border-radius: @card-radius;
+                color: @title-color;
+                text-decoration: none;
+                font-weight: 500;
+                min-width: 40px;
+                text-align: center;
+                
+                &:hover {
+                    background: lighten(@card-bg, 5%);
+                    border-color: @icon-bg;
+                    text-decoration: none;
+                }
+                
+                &.active {
+                    background: @icon-bg;
+                    color: white;
+                    border-color: @icon-border;
+                    font-weight: 600;
+                }
+            }
+            
+            .page-dots {
+                color: @price-color;
+                padding: 0 5px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+

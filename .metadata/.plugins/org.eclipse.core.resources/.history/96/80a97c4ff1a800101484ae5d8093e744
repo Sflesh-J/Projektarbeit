@@ -1,0 +1,369 @@
+// =============================================
+// MAIN STYLES - Index Page (WueKaStL)
+// =============================================
+
+@import "_base.less";
+@import "_components.less";
+
+// =============================================
+// Main Content Layout
+// =============================================
+.main {
+    flex: 1;
+    padding: 30px;
+    
+    .main-title {
+        font-size: @title-font-size;
+        color: @title-color;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 300;
+    }
+    
+    .content-container {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+    }
+}
+
+// =============================================
+// Drinks Section
+// =============================================
+.drinks-section {
+    flex: 2;
+    
+    .drinks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1rem));
+        gap: 25px;
+        
+        .drink-card {
+            .card();
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            min-height: 180px;
+            
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+                background: lighten(@card-bg, 3%);
+            }
+            
+            .drink-name {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: @title-color;
+                margin-bottom: 15px;
+                line-height: 1.3;
+            }
+            
+            .icon-img {
+                margin-bottom: 15px;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            
+            &:hover .icon-img {
+                transform: scale(1.1);
+            }
+            
+            .drink-price {
+                font-size: 1.1rem;
+                color: @price-color;
+                font-weight: 600;
+                margin-top: auto;
+            }
+        }
+    }
+}
+
+.warenkorb-box {
+    flex: 1;
+    min-width: 320px;
+    max-width: 400px;
+    background: @card-bg;
+    border: 2px solid @card-border;
+    border-radius: @card-radius;
+    box-shadow: @card-shadow;
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 30px + @header-height;
+    
+    h3 {
+        color: @title-color;
+        font-size: 1.4rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid @card-border;
+    }
+    
+    .warenkorb {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 20px;
+        min-height: 100px;
+        max-height: 40vh;
+        overflow-y: auto;
+        
+        // Scrollbar Styling für bessere Optik
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background: @card-bg;
+            border-radius: 3px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background: @card-border;
+            border-radius: 3px;
+            
+            &:hover {
+                background: @price-color;
+            }
+        }
+        
+        .warenkorb-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid @card-border;
+            transition: all 0.3s ease;
+            
+      
+            
+            .item-info {
+                flex: 1;
+                
+                .item-name {
+                    font-weight: 600;
+                    color: @title-color;
+                }
+                
+                .item-details {
+                    font-size: 0.9rem;
+                    color: @price-color;
+                    margin-top: 2px;
+                }
+            }
+            
+            .item-controls {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                
+                .quantity-btn {
+                    width: 30px;
+                    height: 30px;
+                    border: 1px solid @card-border;
+                    background: white;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    transition: all 0.2s ease;
+                    
+                    &:hover {
+                        background: @icon-bg;
+                        color: white;
+                    }
+                }
+                
+                .quantity {
+                    min-width: 30px;
+                    text-align: center;
+                    font-weight: 600;
+                }
+            }
+        }
+        
+        .empty-cart {
+            text-align: center;
+            color: @price-color;
+            font-style: italic;
+            padding: 40px 0;
+        }
+    }
+    
+    .warenkorb-summe {
+        border-top: 2px solid @card-border;
+        padding-top: 20px;
+        
+        .sum-label {
+            font-weight: 600;
+            color: @title-color;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .sum-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            .sum-value {
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: @title-color;
+            }
+            
+            .bestaetigen {
+                background: @success-color;
+                color: white;
+                border: 2px solid darken(@success-color, 10%);
+                padding: 12px 20px;
+                border-radius: @card-radius;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                
+                &:hover:not(:disabled) {
+                    background: lighten(@success-color, 5%);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(124, 146, 82, 0.3);
+                }
+                
+                &:active:not(:disabled) {
+                    transform: scale(0.95);
+                }
+                
+                &:disabled {
+                    background: #ccc;
+                    border-color: #aaa;
+                    cursor: not-allowed;
+                    opacity: 0.6;
+                }
+            }
+        }
+    }
+}
+
+
+
+// iPad spezifische Anpassungen - kleinere Karten für mehr Inhalt
+@media (max-width: 1180px) {
+    .drinks-section .drinks-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+        
+        .drink-card {
+            min-height: 140px;
+            padding: 12px 8px;
+            
+            .drink-name {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+                line-height: 1.2;
+            }
+            
+            .icon-img {
+                width: 40px;
+                height: 60px;
+                margin-bottom: 8px;
+            }
+            
+            .drink-price {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+.fehlermeldung{
+    text-align: center;
+	
+	.main-title{
+		font-size: 50px;
+        color: @title-color;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 1000;
+	}
+	.navigation{
+		margin-top: 20px;
+		justify-content: center;
+	}
+	
+}
+
+// Admin Navigation - Nur auf Desktop anzeigen
+.admin-nav {
+    display: inline-block;
+    
+    // Bei iPad und kleineren Geräten verstecken (768px und darunter)
+    @media (max-width: 1180px) {
+        display: none !important;
+    }
+}
+
+// Pagination Styling
+.pagination {
+    text-align: center;
+    .pagination-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        
+        .page-numbers {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            
+            .page-number {
+                display: inline-block;
+                padding: 8px 12px;
+                background: @card-bg;
+                border: 1px solid @card-border;
+                border-radius: @card-radius;
+                color: @title-color;
+                text-decoration: none;
+                font-weight: 500;
+                min-width: 40px;
+                text-align: center;
+                
+                &:hover {
+                    background: lighten(@card-bg, 5%);
+                    border-color: @icon-bg;
+                }
+                
+                &.active {
+                    background: @icon-bg;
+                    color: white;
+                    border-color: @icon-border;
+                    font-weight: 600;
+                }
+            }
+            
+            .page-dots {
+                color: @price-color;
+                padding: 0 5px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+

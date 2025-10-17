@@ -1,0 +1,689 @@
+// =============================================
+// SHARED COMPONENTS - Reusable UI Elements
+// =============================================
+
+@import "_variables.less";
+
+// =============================================
+// Header Component
+// =============================================
+.header {
+    background: @header-bg;
+    display: flex;
+    align-items: center;
+    position: fixed;
+	top: 0px;	
+	left: 0px;
+	right: 0px;
+    justify-content: space-between;
+    padding: 0 30px;
+    height: @header-height;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    user-select: none;
+    
+    .user-info-header {
+        display: flex;
+        flex-direction: column;
+        color: white;
+        
+        .user-name-header {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .saldo {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: @icon-bg;
+        }
+    }
+    
+    .logo {
+        color: @icon-bg;
+        font-size: @logo-font-size;
+        font-weight: 300;
+        letter-spacing: 2px;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        text-decoration: none;
+    }
+}
+
+// =============================================
+// Footer Component
+// =============================================
+.footer {
+    background: @footer-bg;
+    height: @footer-height;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	padding: 0 30px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+	position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+// =============================================
+//	Main
+// =============================================
+.main {
+    flex: 1;
+    padding: 30px;
+    margin-top;: @header-height;
+    
+    .main-title {
+        font-size: @title-font-size;
+        color: @title-color;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 300;
+    }
+    
+    .content-container {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+    }
+}
+
+
+// =============================================
+// Dropdown Component
+// =============================================
+.dropdown {
+    position: relative;
+    
+    .dropdown-toggle {
+        width: 45px;
+        height: 45px;
+        background: @icon-bg;
+        border: 2px solid @icon-border;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(107, 78, 40, 0.2);
+            background: lighten(@icon-bg, 5%);
+        }
+        
+        .icon-menu {
+            font-size: 1.5rem;
+            color: darken(@icon-border, 15%);
+        }
+    }
+    
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 55px;
+        min-width: 180px;
+        background: @card-bg;
+        border: 2px solid @card-border;
+        border-radius: @card-radius;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        z-index: @dropdown-z;
+        padding: 8px 0;
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: @title-color;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                background: @btn-hover;
+                color: white;
+            }
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            margin: 8px 12px;
+            background: @card-border;
+            opacity: 0.6;
+        }
+    }
+    
+    &.open .dropdown-menu {
+        display: block;
+        animation: slideDown 0.3s ease;
+    }
+}
+
+// =============================================
+// Card Component
+// =============================================
+.card {
+    background: @card-bg;
+    border: 2px solid @card-border;
+    border-radius: @card-radius;
+    box-shadow: @card-shadow;
+    padding: 20px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: @hover-shadow;
+    }
+    
+    .card-header {
+        border-bottom: 2px solid @card-border;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        
+        h3 {
+            color: @title-color;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 0;
+        }
+    }
+    
+    .card-body {
+        flex: 1;
+    }
+    
+    .card-footer {
+        border-top: 2px solid @card-border;
+        padding-top: 15px;
+        margin-top: 20px;
+    }
+}
+
+// =============================================
+// Button Components
+// =============================================
+.btn {
+    padding: 8px 15px;
+    border: 1.5px solid;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    
+    &:active {
+        transform: scale(0.95);
+    }
+    
+    &:disabled {
+        background: #ccc;
+        border-color: #aaa;
+        cursor: not-allowed;
+        opacity: 0.6;
+        
+        &:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+    
+    // Button Variants
+    &.btn-success {
+        background: @success-color;
+        border-color: @success-color;
+        color: white;
+        
+        &:hover:not(:disabled) {
+            background: lighten(@success-color, 10%);
+        }
+    }
+    
+    &.btn-danger {
+        background: @danger-color;
+        border-color: @danger-color;
+        color: white;
+        
+        &:hover:not(:disabled) {
+            background: lighten(@danger-color, 10%);
+        }
+    }
+    
+    &.btn-secondary {
+        background: @secondary-color;
+        border-color: @secondary-color;
+        color: white;
+        
+        &:hover:not(:disabled) {
+            background: lighten(@secondary-color, 10%);
+        }
+    }
+    &.btn-edit {
+	    background: @header-bg !important;
+    	border-color: @header-bg 	!important;
+    	color: white;
+    
+    	&:hover:not(:disabled) {
+        	background: lighten(@header-bg, 10%);
+    	}
+    }
+    
+    &.btn-outline {
+        background: transparent;
+        color: @card-border;
+        border-color: @card-border;
+        
+        &:hover:not(:disabled) {
+            background: @card-border;
+            color: white;
+        }
+    }
+    
+    &.btn-close {
+  		background: @danger-color;
+  		color: white;
+  		border: none;
+  		border-radius: 6px;
+  		padding: 8px 12px;
+  		cursor: pointer;
+  		font-weight: bold;
+  		transition: all 0.3s ease;
+
+  		&:hover {
+    		background: @danger-hover;
+    		transform: scale(1.05);
+  }
+  	&.active {
+	  	background: @header-bg !important;
+	  	color: white !important;
+  	}
+}
+&.btn-auswahl {
+        background: @card-bg;
+        color: black;
+        border: 1.5px solid @dark-border;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 1em;
+        cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        
+        &:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+            background: @btn-hover;
+            color: white;
+        }
+    }
+    }
+
+
+// Legacy button classes for compatibility
+
+
+// =============================================
+// Form Components
+// =============================================
+.form-group {
+    margin-bottom: 20px;
+    
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: @title-color;
+    }
+    
+    input, select, textarea {
+        padding: 12px;
+        border: 2px solid @card-border;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        
+        &:focus {
+            outline: none;
+            border-color: @icon-border;
+            box-shadow: 0 0 0 3px rgba(209, 188, 150, 0.2);
+        }
+    }
+}
+
+// =============================================
+// Alert Components
+// =============================================
+.alert {
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    
+    &.alert-success {
+        background: @success-bg;
+        color: @success-color;
+        border-color: lighten(@success-color, 30%);
+    }
+    
+    &.alert-error {
+        background: @error-bg;
+        color: @danger-color;
+        border-color: lighten(@danger-color, 30%);
+    }
+}
+
+// =============================================
+// Transaktionsverlauf
+// =============================================
+
+.verlauf-section {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    
+    .verlauf-table-container {
+        background: @card-bg;
+        border: 1.5px solid @card-border;
+        border-radius: @card-radius;
+        box-shadow: @card-shadow;
+        overflow: hidden;
+        
+        .verlauf-table {
+            width: 100%;
+            border-collapse: collapse;
+            
+            caption {
+                caption-side: top;
+                text-align: center;
+                font-size: 1.6em;
+                color: @header-bg;
+                padding: 18px 0 10px 0;
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+            
+            thead {
+				background: @header-bg;
+                
+                th {
+                    color: white;
+                    text-align: left;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    padding: 18px 15px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    border: none;
+                }
+            }
+            
+            tbody {
+                tr {
+                    transition: all 0.3s ease;
+                    border-bottom: 1px solid lighten(@card-border, 10%);
+                    
+                    &:nth-child(even) {
+                        background: lighten(@card-bg, 3%);
+                    }
+                    
+                    &:hover {
+                        background: lighten(@icon-bg, 15%);
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    }
+                    
+                    // Transaction type styling
+                    &.striche {
+						.betrag {
+							color: @danger-color;
+							font-weight: 700;	
+						}
+                    }
+                    &.aufbuchung {
+                        .betrag {
+	                        color: @success-color;
+	                        font-weight: 700;
+                        }
+                        
+                    }
+                    &.abbuchung {
+                        .betrag {
+							color: @danger-color;
+							font-weight: 700;	
+						}
+                    }
+                }
+                
+                td {
+                    padding: 15px;
+                    vertical-align: middle;
+                    border: none;
+                }
+            }
+        }
+    }
+}
+
+// =============================================
+// Arrows
+// =============================================
+
+.navigation {
+    display: flex;
+    gap: 14px;
+    margin-left: auto;
+
+    
+    .arrow {
+  border: solid @dark-border;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+    
+}
+
+// =============================================
+// meldungen
+// =============================================
+
+/* From Uiverse.io by andrew-demchenk0 */ 
+.success {
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  position: fixed;
+  top: 80px;
+  right: 30px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  background: #84D65A;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+.success__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-right: 8px;
+.success__icon path {
+  fill: #393A37;
+}
+}
+
+.success__title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #393A37;
+}
+
+.success__close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+
+
+.success__close path {
+  fill: #393A37;
+}
+}
+}
+
+.error {
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  background: #FF6B6B;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+.error__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-right: 8px;
+.error__icon path {
+  fill: #393A37;
+}
+}
+
+.error__title {
+	font-weight: 500;
+  font-size: 14px;
+  color: #393A37;
+}
+.error__close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+
+
+.error__close path {
+  fill: #393A37;
+}
+}
+}
+
+
+// =============================================
+// User Info
+// =============================================
+
+.user-info-section {
+    background: @card-bg;
+    border: 1.5px solid @card-border;
+    border-radius: @card-radius;
+    box-shadow: @card-shadow;
+	padding: 20px;
+    min-width: 400px;
+    width: fit-content;
+    margin-top: 15px;
+    
+    .user-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid @card-border;
+        
+        h3 {
+            color: @title-color;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        
+        .user-status {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            
+            &.active {
+                background: lighten(@success-color, 40%);
+                color: @success-color;
+                border: 1px solid @success-color;
+            }
+            
+            &.inactive {
+                background: lighten(@danger-color, 40%);
+                color: @danger-color;
+                border: 1px solid @danger-color;
+            }
+        }
+    }
+    
+    .user-details {
+        margin-bottom: 20px;
+        
+        p {
+            margin-bottom: 8px;
+            
+            .balance {
+                color: @success-color;
+                font-weight: 600;
+            }
+        }
+    }
+    
+    .status-form {
+        margin-bottom: 20px;
+    }
+    
+    h4 {
+        color: @title-color;
+        font-size: 1.1em;
+        margin: 20px 0 10px 0;
+        padding-bottom: 5px;
+        border-bottom: 1px solid @card-border;
+    }
+}

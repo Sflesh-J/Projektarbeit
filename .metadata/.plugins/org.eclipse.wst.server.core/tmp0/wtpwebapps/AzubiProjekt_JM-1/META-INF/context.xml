@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	
+	<Resource name="jdbc/AzubiProjekt_JM-1"
+		url="jdbc:mariadb://127.0.0.1:3306/real"
+		username="root" password="Fg74j8n."
+		
+		initialSize="10" minIdle="10" maxIdle="10" maxActive="10"
+		maxWait="30000" removeAbandonedTimeout="30"
+		
+		validationInterval="5000" removeAbandoned="true" logAbandoned="true"
+		timeBetweenEvictionRunsMillis="5000" minEvictableIdleTimeMillis="60000"
+		testWhileIdle="true" testOnBorrow="true" testOnReturn="false" validationQuery="SELECT 1" 
+		auth="Container" type="javax.sql.DataSource" driverClassName="org.mariadb.jdbc.Driver"
+		factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+		jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+		connectionProperties="useUnicode=yes;characterEncoding=utf8;useSSL=false;"
+		jmxEnabled="false" />
+		
+</Context>

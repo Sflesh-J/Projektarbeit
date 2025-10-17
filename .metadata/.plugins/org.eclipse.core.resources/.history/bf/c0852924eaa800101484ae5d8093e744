@@ -1,0 +1,176 @@
+package de.uniwue.apps.jm1.servlets;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import de.uniwue.apps.jm1.Buchung;
+import de.uniwue.apps.jm1.Buchung.Buchungstyp;
+import de.uniwue.apps.jm1.Item;
+import de.uniwue.apps.jm1.Main;
+import de.uniwue.apps.jm1.User;
+
+public class BuchungsServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7637699509506375704L;
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		try {
+			User user = (User) req.getSession().getAttribute("user");
+			String method = req.getParameter("method");
+			String buchungID = req.getParameter("buchungID");
+			
+			String u = req.getParameter(Main.USER_UID_PARAM);
+			User userToChange = User.getUserbyUID(u);
+			List<User> users = new LinkedList<>();
+			
+			if(userToChange == null) {
+				String[] userIds = req.getParameterValues("userIds");
+				
+				if(userIds != null) {
+					for(String s : userIds) {
+						users.add(User.getUserbyUID(s));
+					}
+				}
+			}
+			
+			if(method.equals("strich")) {
+			String[] itemW = req.getParameterValues("itemW");
+			
+			HashMap<Item, Integer> itemlist = new HashMap<>();
+			
+			int summe = 0; 
+			
+			if (itemW != null ){
+			    for (String s : itemW) {
+			    	String[] parts = s.split(":");
+			    	int itemUid = Integer.parseInt(parts[0]);     
+			    	int anzahl = Integer.parseInt(parts[1]);;
+			    	Item item = Item.getItem(itemUid);
+			    	summe += item.getPreis() * anzahl;
+			    	itemlist.put(item, anzahl);
+			    	
+			    	
+			    }
+			}
+			Buchung.erstelleBuchung(itemlist, user ,summe, null , Buchungstyp.STRICHE);
+			
+			resp.sendRedirect("index.jsp?isSuccess=1");
+			}else if(method.equals("aufbuchen") && user.isAdmin()) {
+				if(userToChange == null) {
+					for(User u2 : users) {
+						aufbuchen(u2, req.getParameter("betrag"), req.getParameter("kommentar"));
+					}
+					resp.sendRedirect("admin_user.jsp");
+				}else {
+					aufbuchen(userToChange, req.getParameter("betrag"), req.getParameter("kommentar"));
+					resp.sendRedirect("admin_user.jsp?uid=" + userToChange.getUid() );
+				}
+			}else if (method.equals("abbuchen") && user.isAdmin()) {
+				if(userToChange == null) {
+					for(User u2 : users) {
+						abbuchen(u2, req.getParameter("betrag"), req.getParameter("kommentar"));
+					}
+					resp.sendRedirect("admin_user.jsp");
+				}else {
+					abbuchen(userToChange, req.getParameter("betrag"), req.getParameter("kommentar"));
+					resp.sendRedirect("admin_user.jsp?uid=" + userToChange.getUid() );
+				}
+			}else if(method.equals("loescheBuchung")) {
+				if(userToChange == null) {
+					Buchung.loescheBuchung(Integer.parseInt(buchungID), user);
+
+					resp.sendRedirect("verlauf.jsp");
+				}else {
+				Buchung.loescheBuchung(Integer.parseInt(buchungID), userToChange);
+				resp.sendRedirect("admin_user.jsp?uid=" + userToChange.getUid());
+				}
+			}
+			else if(method.equals("bearbeitenBuchung")) {
+				if(userToChange == null) {
+					resp.sendRedirect("buchung_bearbeiten.jsp?uid=" + user.getUid() + "&buchungid=" +  buchungID);
+
+				}else {
+					resp.sendRedirect("buchung_bearbeiten.jsp?uid=" + userToChange.getUid() + "&buchungid=" +  buchungID);
+				}
+			}else if(method.equals("bearbeitenBuchungSubmit")) {
+				String[] itemW = req.getParameterValues("itemW");
+				String[] itempreis = req.getParameterValues("itempreisID");
+				String[] tablet = req.getParameterValues("tablet");
+				String userUid = req.getParameter("userUid");
+				userToChange = User.getUserbyUID(userUid);
+				Buchung buchung = Buchung.getBuchung(Integer.parseInt(buchungID));
+				
+				
+				HashMap<Item, Integer> itemlist = new HashMap<>();
+				
+				List<Integer> itempreisID = new LinkedList<Integer>();
+				
+				int summe = 0; 
+				
+				if (itemW != null ){
+				    for (String s : itemW) {
+				    	String[] parts = s.split(":");
+				    	int itemUid = Integer.parseInt(parts[0]);     
+				    	int anzahl = Integer.parseInt(parts[1]);;
+				    	Item item = Item.getItem(itemUid);
+				    	summe += item.getPreis() * anzahl;
+				    	itemlist.put(item, anzahl);	
+				    }
+				}else {
+					throw new Exception("Keine Items ausgewählt");
+				}
+				
+				if (itempreis != null){
+				    for (String s : itempreis) {
+				    	itempreisID.add(Integer.parseInt(s));	
+				    }
+				}else {
+					throw new Exception("Es ist ein Fehler aufgetreten");
+				}
+				Buchung.bearbeiteBuchung(itempreisID,itemlist, userToChange,summe, "Bearbeitete Buchung", buchung.getBt(), buchung.getUid());
+				if(user.isAdmin() && tablet.equals("1")) {
+					resp.sendRedirect("admin_user.jsp?uid=" + userToChange.getUid());
+			
+				}else {
+					resp.sendRedirect("verlauf.jsp");
+				}
+			}
+			
+		} catch (Exception ex) {
+			throw new ServletException(ex);
+			
+		}
+	}
+	
+	
+	public void aufbuchen(User user, String betrag, String kommentar) {
+		betrag = betrag.replace(",", ".");
+		double betragDouble = Double.parseDouble(betrag);
+		int betragInt = (int) Math.round(betragDouble * 100);
+		
+		Buchung.erstelleBuchung(user, betragInt, kommentar, Buchung.Buchungstyp.AUFBUCHUNG);
+	}
+	
+	public void abbuchen(User user, String betrag, String kommentar) {
+		
+		betrag = betrag.replace(",", ".");
+		double betragDouble = Double.parseDouble(betrag);
+		int betragInt = (int) Math.round(betragDouble * 100);
+		
+		Buchung.erstelleBuchung(user, betragInt, kommentar, Buchung.Buchungstyp.ABBUCHUNG);
+	}
+	
+	
+}

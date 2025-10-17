@@ -1,0 +1,142 @@
+<%@page import="de.uniwue.apps.jm1.User"%>
+<%@page import="de.uniwue.apps.jm1.Item"%>
+<%@page import="de.uniwue.apps.jm1.Main"%>
+<%@page import="de.uniwue.apps.jm1.Buchung"%>
+<%@page import="java.text.DecimalFormat"%>
+<%
+User user = (User) session.getAttribute("user");
+if (user == null) {
+    response.sendRedirect("benutzer.jsp");
+    return;
+}
+
+String uid = null;
+try {
+    uid = "" + Integer.parseInt(request.getParameter("uid"));
+} catch(Exception e) {
+    // uid bleibt null
+}
+User userAnzeigen = User.getUserbyUID(uid);
+
+String buchungID = null;
+try {
+    buchungID = "" + Integer.parseInt(request.getParameter("buchungid"));
+} catch(Exception e) {
+    // uid bleibt null
+}
+Buchung buchung = Buchung.getBuchung(Integer.parseInt(buchungID));
+
+
+user = User.getUserbyUID("" + user.getUid());
+session.setAttribute("user", user);
+session.setAttribute("buchung", buchung);
+
+DecimalFormat euroFormat = new DecimalFormat("#,##0.00 €");
+String guthaben = euroFormat.format(user.getGuthaben() / 100.0);
+%>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>WueKaStL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="user-info-header">
+            <div class="user-name-header"><%= user.getVorname() %> <%= user.getNachname() %></div>
+            <div class="saldo"><%= guthaben %></div>
+        </div>
+        
+         <a class="logo" href="index.jsp" >WueKaStL</a>
+       		<a href="index.jsp" class="btn  btn-danger" >Abbrechen</a>
+
+    </div>
+
+    <!-- Hauptbereich -->
+    <div class="main">
+        <h2 class="main-title">Buchung bearbeiten</h2>
+        
+        <div class="content-container">
+            <div class="drinks-section">
+                <div class="drinks-grid">
+                    <% // nach dem datum der Buchung eisntellen
+                    for (Item item : Item.getItLi()) {
+                        if (item.isAktiv()) {
+                            String preis;
+                            int preisInCent = item.getPreis();
+                            if (preisInCent >= 100) {
+                                preis = euroFormat.format(preisInCent / 100.0);
+                            } else {
+                                preis = preisInCent + " ct";
+                            }
+                    %>
+                        <div class="drink-card add-item" 
+                             data-uid="<%= item.getUid() %>" 
+                             data-itempreis-id="<%= item.getItempreisID() %>"
+                             data-name="<%= item.getName() %>"
+                             data-price="<%= preisInCent %>">
+                            <div class="drink-name"><%= item.getName() %></div>
+                            <img alt="<%= item.getName() %>" class="icon-img" src="<%= item.getIconUrl() %>">
+                            <div class="drink-price"><%= preis %></div>
+                        </div>
+                    <% 
+                        }
+                    } 
+                    %>
+                </div>
+            </div>
+            
+            <div class="warenkorb-box">
+                <h3>Warenkorb</h3>
+                <ul class="warenkorb" id="warenkorb-liste">
+         
+                </ul>
+                <div class="warenkorb-summe">
+                    <span class="sum-label">Gesamtsumme:</span>
+                    <div class="sum-actions">
+                        <span class="sum-value">
+                            0<span class="euro">€</span>
+                        </span>
+                        <form action="buchungen" id="warenkorb-form" method="POST" style="display: inline;">
+							<input type="hidden" name="userUid" value="<%= buchung.getUserID() %>" />
+							<input type="hidden" name="buchungID" value="<%= buchung.getUid() %>" />
+							<input type="hidden" name="tablet" value="" />
+                            <button type="submit" class="bestaetigen" name="method" value="bearbeitenBuchungSubmit">
+                                Speichern
+                            </button>
+							<div  id="hidden-warenkorb">
+                            
+							</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+    </div>
+
+    
+    <script type="text/javascript">
+	     var items = [];
+        <% 
+        try {
+	        
+        for (Item i : Item.getStriche(buchung.getUid())) { 
+        %>
+            items.push({ 
+                name: '<%= i.getName() %>', 
+                uid: '<%= i.getUid() %>',
+                itempreisID: '<%= i.getItempreisID() %>',
+               	preis: <%= i.getPreis() %>
+            });
+        <% }}catch (Exception e) {System.out.println(e);} %>
+    </script>
+
+    <script src="js/bearbeiten.js"></script>
+</body>
+</html>
