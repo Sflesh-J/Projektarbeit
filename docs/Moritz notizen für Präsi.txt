@@ -1,0 +1,21 @@
+Allgemeines
+Verwende die offizielle CI-Präsentationsvorlage der Uni Würzburg (Vorlage wurde per Teams bereitgestellt).
+Achte auf einheitliche Schriftarten, Farben und Layouts entsprechend der CI.
+Einleitung
+Kurze Vorstellung des Rechenzentrums (RZ) einbauen.
+Abteilung kurz vorstellen (Aufgaben, Zuständigkeiten, Teamgröße).
+Projektvisualisierung
+Papier-Kaffeeliste-Fotos anonymisiert einfügen.
+Danach ein Mockup-Bild mit einem iPad einfügen, auf dem der Screenshot der Anwendung zu sehen ist.
+Konzentriere dich mehr auf die Abläufe und Fortschritte und weniger auf technische Details
+wenn du technsiche Details verwendest fokussiere dich auf die die du gut verstehst um Fragen zu lenken
+Anwendungsdarstellung
+Wenn keine Live-Demo möglich ist, Screenshots der Anwendung auf mehreren Folien zeigen:
+Übersicht
+Hauptfunktionen
+Beispiel-Eintrag bzw. Workflow
+Abschlussfolie
+Letzte Folie in zwei Folien aufteilen.
+Abschlussfolien einbauen
+Teil 1: Fazit oder Ausblick
+Teil 2: Dank, Kontakt und Fragen
