@@ -103,8 +103,8 @@ public class BuchungsServlet extends HttpServlet {
 					
 			}else if(method.equals("bearbeitenBuchungSubmit")) {
 				String[] itemW = req.getParameterValues("itemW");
-				String[] itempreis = req.getParameterValues("itempreisID");
-				String[] tablet = req.getParameterValues("tablet");
+                                String[] itempreis = req.getParameterValues("itempreisID");
+                                String tablet = req.getParameter("tablet");
 				String userUid = req.getParameter("userUid");
 				userToChange = User.getUserbyUID(userUid);
 				Buchung buchung = Buchung.getBuchung(Integer.parseInt(buchungID));
@@ -136,11 +136,11 @@ public class BuchungsServlet extends HttpServlet {
 				}else {
 					throw new Exception("Es ist ein Fehler aufgetreten");
 				}
-				Buchung.bearbeiteBuchung(itempreisID,itemlist, userToChange,summe, "Bearbeitete Buchung", buchung.getBt(), buchung.getUid());
-				if(user.isAdmin() && tablet.equals("1")) {
-					resp.sendRedirect("admin_user.jsp?uid=" + userToChange.getUid());
-			
-				}else {
+                                Buchung.bearbeiteBuchung(itempreisID,itemlist, userToChange,summe, "Bearbeitete Buchung", buchung.getBt(), buchung.getUid());
+                                if(user.isAdmin() && "1".equals(tablet)) {
+                                        resp.sendRedirect("admin_user.jsp?uid=" + userToChange.getUid());
+
+                                }else {
 					resp.sendRedirect("verlauf.jsp");
 				}
 			}

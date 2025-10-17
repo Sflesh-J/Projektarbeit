@@ -205,20 +205,20 @@ public class Item {
 					);
 		}
 		
-		public static void bucheItem(Item item, int buchungID, int itempreisID) {
-			Connection con = null;
-			PreparedStatement stmt = null;
-			ResultSet rs = null;
-			
-			try {
-				con = DB.cp.getConnection();
-				
-				stmt = con.prepareStatement("INSERT INTO `strich`"
-						+ " (`Item-ID`, `Buchung-ID`, `Itempreis-ID`)"
-						+ " VALUES (?, ?, ?);");
-				stmt.setInt(1, item.getUid());
-				stmt.setInt(2, buchungID);
-				stmt.setInt(3, item.getItempreisID());
+                public static void bucheItem(Item item, int buchungID, int itempreisID) {
+                        Connection con = null;
+                        PreparedStatement stmt = null;
+                        ResultSet rs = null;
+
+                        try {
+                                con = DB.cp.getConnection();
+
+                                stmt = con.prepareStatement("INSERT INTO `strich`"
+                                                + " (`Item-ID`, `Buchung-ID`, `Itempreis-ID`)"
+                                                + " VALUES (?, ?, ?);");
+                                stmt.setInt(1, item.getUid());
+                                stmt.setInt(2, buchungID);
+                                stmt.setInt(3, itempreisID);
 				stmt.executeUpdate();
 	 
 			} catch (final Exception mye) {
