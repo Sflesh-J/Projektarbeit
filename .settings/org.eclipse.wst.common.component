@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
+    <wb-module deploy-name="AzubiProjekt_JM-1">
+        <wb-resource deploy-path="/" source-path="/webapp"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
+                
+        <property name="context-root" value="AzubiProjekt_JM-1"/>
+        <property name="java-output-path" value="/AzubiProjekt_JM-1/webapp/WEB-INF/classes"/>
+            
+    </wb-module>
+    
+</project-modules>

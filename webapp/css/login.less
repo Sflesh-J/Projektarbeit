@@ -1,0 +1,656 @@
+// =============================================
+// LOGIN STYLES - Login Page
+// =============================================
+
+@import "_base.less";
+@import "_components.less";
+
+// =============================================
+// Login Page Specific Styles
+// =============================================
+body {
+    padding: 20px;
+    overflow: auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.header-login {
+    text-align: center;
+    margin-bottom: 25px;
+    display: flex;
+    min-width: 800px;
+	flex-direction: column;
+	align-items: center;
+    
+    h1 {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        font-weight: 300;
+    }
+    
+    p {
+        color: @price-color;
+        font-size: 1rem;
+    }
+}
+
+.search-bar {
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    font-size: 1rem;
+    border: 2px solid @card-border;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: @card-bg;
+    
+    &:focus {
+        border-color: @icon-bg;
+        box-shadow: 0 0 15px rgba(209, 188, 150, 0.3);
+        background: white;
+    }
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: @price-color;
+    font-size: 1.1rem;
+}
+
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(800px, 1rem));
+    justify-content: space-evenly;
+    align-content: start;
+    margin-bottom: 20px;
+    gap: 4px;
+}
+
+.user-card {
+    background: @card-bg;
+    border-radius: @card-radius;
+    padding: 0;
+    border: 2px solid @card-border;
+    box-shadow: @card-shadow;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 4px;
+    
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(107, 78, 40, 0.2);
+        border-color: @icon-bg;
+        background: lighten(@card-bg, 3%);
+    }
+    
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.user-button {
+    width: 100%;
+    padding: 20px 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    
+    &:hover {
+        background: rgba(209, 188, 150, 0.1);
+    }
+    
+    &:active {
+        background: rgba(209, 188, 150, 0.2);
+    }
+}
+
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, @header-bg, @footer-bg);
+    border: 2px solid @icon-border;
+}
+
+.user-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: @title-color;
+    line-height: 1.3;
+    margin-bottom: 8px;
+}
+
+.user-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background: @icon-bg;
+    border: 1px solid @icon-border;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: @price-color;
+    font-size: 1.1rem;
+    display: none;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: @price-color;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid lighten(@card-border, 20%);
+    border-top: 4px solid @icon-bg;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+// Media Queries - iPad & Handy optimiert
+@media (min-width: 1024px) {
+   .user-grid {
+       grid-template-columns: repeat(auto-fill, minmax(180px, 1rem));
+       justify-content: space-evenly;
+   }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+   // iPad Portrait & Landscape
+   .container {
+       padding: 25px;
+   }
+   
+   .user-grid {
+       grid-template-columns: repeat(auto-fill, minmax(150px, 1rem));
+       justify-content: space-evenly;
+       margin-bottom: 20px;
+   }
+   
+   .user-button {
+       padding: 18px 12px;
+   }
+   
+   .user-avatar {
+       width: 55px;
+       height: 55px;
+       font-size: 1.3rem;
+   }
+   
+   .search-input {
+       padding: 14px 50px 14px 18px;
+       font-size: 1.1rem;
+   }
+}
+
+@media (max-width: 481px) and ( max-width: 767px) {
+   // Handy
+   .container {
+       padding: 15px;
+       border-radius: 15px;
+   }
+   
+   .header {
+       margin-bottom: 20px;
+       
+       h1 {
+           font-size: 1.6rem;
+       }
+       
+       p {
+           font-size: 0.9rem;
+       }
+   }
+   
+   .search-bar {
+       margin-bottom: 20px;
+       max-width: 100%;
+   }
+   
+   .search-input {
+       padding: 12px 40px 12px 15px;
+       font-size: 1rem;
+       border-radius: 20px;
+   }
+   
+   .search-icon {
+       right: 12px;
+       font-size: 1rem;
+   }
+   
+   .user-grid {
+       grid-template-columns: 50% 50%;
+       justify-content: space-evenly;
+       margin-bottom: 15px;
+   }
+   
+   .user-button {
+       padding: 12px 8px;
+   }
+   
+   .user-avatar {
+       width: 45px;
+       height: 45px;
+       font-size: 1.1rem;
+       margin-bottom: 8px;
+   }
+   
+   .user-name {
+       font-size: 0.8rem;
+       line-height: 1.2;
+       margin-bottom: 6px;
+   }
+   
+   .user-status {
+       width: 8px;
+       height: 8px;
+   }
+}
+
+@media (max-width: 480px) {
+   // Kleine Handys
+   .container {
+       padding: 12px;
+   }
+   
+   .user-grid {
+       grid-template-columns: 50% 50%;
+       justify-content: space-evenly;
+   }
+   
+   .user-button {
+       padding: 10px 6px;
+   }
+   
+   .user-avatar {
+       width: 40px;
+       height: 40px;
+       font-size: 1rem;
+   }
+   
+   .user-name {
+       font-size: 0.75rem;
+   }
+}
+
+.section {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.back-btn {
+    background: @card-bg;
+    border: 2px solid @card-border;
+    border-radius: @card-radius;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: @header-bg;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    
+    &:hover {
+        background: lighten(@card-bg, 5%);
+        border-color: @icon-bg;
+        text-decoration: none;
+        color: @header-bg;
+    }
+    
+    &:active {
+        background: darken(@card-bg, 5%);
+    }
+}
+.pinpad-header {
+    margin-bottom: 30px;
+    
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        font-weight: 500;
+        color: @title-color;
+    }
+    
+    .user-name {
+        font-size: 1.1rem;
+        color: @price-color;
+        font-weight: 400;
+        margin: 0;
+    }
+}
+
+.pinpad-container {
+    background: @card-bg;
+    border: 2px solid @card-border;
+    border-radius: @card-radius;
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: @card-shadow;
+}
+.pinpad-display-section {
+    margin-bottom: 25px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pinpad-input {
+    background: white;
+    border: 2px solid @card-border;
+    border-radius: @card-radius;
+    min-height: 50px;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 200px;
+    letter-spacing: 0.2em;
+    
+    &:focus {
+        outline: none;
+        border-color: @icon-bg;
+    }
+}
+
+.pinpad-grid {
+    display: grid;
+    grid-template-columns: 32.5% 32.5% 32.5%;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.pinpad-btn {
+    background: @card-bg;
+    border: 2px solid @card-border;
+    border-radius: @card-radius;
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: @header-bg;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+        background: lighten(@card-bg, 5%);
+        border-color: @icon-bg;
+    }
+    
+    &:active {
+        background: darken(@card-bg, 5%);
+    }
+    
+    &.special {
+        background: @icon-bg;
+        border-color: @icon-border;
+        color: white;
+        font-weight: bold;
+        
+        &:hover {
+            background: lighten(@icon-bg, 10%);
+        }
+        
+        &:active {
+            background: darken(@icon-bg, 5%);
+        }
+    }
+}
+
+// Error message positioning for login page
+.pinpad-container .error {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: none;
+}
+
+// Mobile optimizations for pinpad
+@media (max-width: 480px) {
+    .pinpad-container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .pinpad-btn {
+        padding: 15px;
+        font-size: 1.2rem;
+        min-height: 50px;
+    }
+    
+    .back-btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+// =============================================
+// Neue Login-Seite Styles - Minimalistisch
+// =============================================
+
+// Login Container - Zentrale Ausrichtung
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+// Zurück Link
+.back-link {
+    align-self: flex-start;
+    margin-bottom: 20px;
+}
+
+// Login Karte
+.login-card {
+    background: @card-bg;
+    border: 1px solid @card-border;
+    border-radius: @card-radius;
+    padding: 30px;
+    box-shadow: @card-shadow;
+    width: 100%;
+}
+
+// Login Header
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+    
+    h1 {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: @title-color;
+        margin-bottom: 8px;
+    }
+    
+    .username {
+        color: @price-color;
+        font-size: 1rem;
+        margin: 0;
+    }
+}
+
+// Error Message
+.error-msg {
+    background: lighten(#ff6b6b, 45%);
+    color: #d63031;
+    padding: 12px;
+    border-radius: @card-radius;
+    margin-bottom: 20px;
+    font-size: 14px;
+    position: relative;
+    border: 1px solid lighten(#d63031, 30%);
+    
+    .error-close {
+        position: absolute;
+        right: 10px;
+        top: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        font-weight: bold;
+        
+        &:hover {
+            color: #b71c1c;
+        }
+    }
+}
+
+// PIN Display
+.pin-display {
+    margin-bottom: 25px;
+    
+    #pin-input {
+        width: 100%;
+        height: 50px;
+        border: 2px solid @card-border;
+        border-radius: @card-radius;
+        text-align: center;
+        font-size: 18px;
+        letter-spacing: 3px;
+        background: lighten(@card-bg, 2%);
+        
+        &:focus {
+            outline: none;
+            border-color: @icon-bg;
+            background: white;
+        }
+    }
+}
+
+// PIN Buttons Grid
+.pin-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+// PIN Buttons
+.pin-btn {
+    height: 50px;
+    border: 2px solid @card-border;
+    background: @card-bg;
+    border-radius: @card-radius;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    color: @title-color;
+    
+    &:hover {
+        background: lighten(@card-bg, 3%);
+        border-color: @icon-bg;
+    }
+    
+    &:active {
+        background: darken(@card-bg, 2%);
+    }
+    
+    // Clear Button
+    &.clear-btn {
+        background: #e17055;
+        color: white;
+        border-color: #d63031;
+        
+        &:hover {
+            background: #d63031;
+        }
+        
+        &:active {
+            background: darken(#d63031, 5%);
+        }
+    }
+    
+    // Submit Button
+    &.submit-btn {
+        background: @icon-bg;
+        color: white;
+        border-color: @icon-border;
+        
+        &:hover {
+            background: lighten(@icon-bg, 5%);
+        }
+        
+        &:active {
+            background: darken(@icon-bg, 5%);
+        }
+    }
+}
+
+// Mobile Anpassungen für neue Login-Seite
+@media (max-width: 480px) {
+    .login-container {
+        padding: 15px;
+        min-height: 100vh;
+    }
+    
+    .login-card {
+        padding: 20px;
+    }
+    
+    .login-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .pin-buttons {
+        gap: 6px;
+    }
+    
+    .pin-btn {
+        height: 45px;
+        font-size: 16px;
+    }
+}

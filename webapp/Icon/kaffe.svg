@@ -1,0 +1,47 @@
+<svg width="60" height="80" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Kaffeetasse -->
+  <path d="M15 30 L15 65 Q15 72 22 72 L38 72 Q45 72 45 65 L45 30 Z" 
+        fill="#8B4513" 
+        stroke="#654321" 
+        stroke-width="2"/>
+  
+  <!-- Henkel -->
+  <path d="M45 40 Q55 40 55 50 Q55 60 45 60" 
+        fill="none" 
+        stroke="#654321" 
+        stroke-width="3"/>
+  
+  <!-- Kaffee -->
+  <rect x="17" y="32" width="26" height="35" 
+        fill="#3E2723" 
+        rx="2"/>
+  
+  <!-- Kaffeeoberfläche -->
+  <ellipse cx="30" cy="32" rx="13" ry="2" 
+           fill="#5D4037"/>
+  
+  <!-- Dampf -->
+  <path d="M22 25 Q22 20 25 20 Q25 15 22 15 Q22 10 25 10" 
+        fill="none" 
+        stroke="#A67C52" 
+        stroke-width="2" 
+        stroke-linecap="round"/>
+  
+  <path d="M30 25 Q30 20 33 20 Q33 15 30 15 Q30 10 33 10" 
+        fill="none" 
+        stroke="#A67C52" 
+        stroke-width="2" 
+        stroke-linecap="round"/>
+  
+  <path d="M38 25 Q38 20 41 20 Q41 15 38 15 Q38 10 41 10" 
+        fill="none" 
+        stroke="#A67C52" 
+        stroke-width="2" 
+        stroke-linecap="round"/>
+  
+  <!-- Untertasse -->
+  <ellipse cx="30" cy="75" rx="25" ry="5" 
+           fill="#D7CCC8" 
+           stroke="#BCAAA4" 
+           stroke-width="1"/>
+</svg>
