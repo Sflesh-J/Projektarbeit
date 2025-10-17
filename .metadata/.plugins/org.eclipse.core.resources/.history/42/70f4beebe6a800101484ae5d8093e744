@@ -1,2 +1,0 @@
-datasource.context = java:comp/env
-datasource.datasource = jdbc/WueKaStL
