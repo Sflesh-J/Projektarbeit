@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -238,32 +239,31 @@ public class User implements Serializable  {
 		return res;
 	}
 	
-	public static void setPassword(final String pwd, int userUid) {
+        public static void setPassword(final String pwd, int userUid) {
 
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		try {
-			con = DB.cp.getConnection();
+                Connection con = null;
+                PreparedStatement stmt = null;
+                try {
+                        con = DB.cp.getConnection();
 
-			stmt = con.prepareStatement("UPDATE `user` "
-					+ "SET `Passwort` = SHA2(?, 256)  "
-					+ "WHERE `Uid` = ?;");
-			if(pwd.isEmpty()) {
-				stmt.setString(1, null);
-			}else {
-				stmt.setString(1, pwd);
-			}
-			stmt.setInt(2, userUid);
-			
-			rs = stmt.executeQuery();
+                        stmt = con.prepareStatement("UPDATE `user` "
+                                        + "SET `Passwort` = SHA2(?, 256)  "
+                                        + "WHERE `Uid` = ?;");
+                        if (pwd == null || pwd.isEmpty()) {
+                                stmt.setNull(1, Types.VARCHAR);
+                        } else {
+                                stmt.setString(1, pwd);
+                        }
+                        stmt.setInt(2, userUid);
 
-		} catch (final Exception mye) {
-			mye.printStackTrace();
-		} finally {
-			DB.close(con, rs, stmt);
-		}
-	}
+                        stmt.executeUpdate();
+
+                } catch (final Exception mye) {
+                        mye.printStackTrace();
+                } finally {
+                        DB.close(con, null, stmt);
+                }
+        }
 	
 	public static void newUser(String vorname, String nachname, String status, String admin, String guthaben, String pwd ) {
 		

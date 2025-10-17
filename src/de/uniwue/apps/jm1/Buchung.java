@@ -349,16 +349,15 @@ public class Buchung {
 	}
 	
 	
-	@SuppressWarnings("unlikely-arg-type")
-	public static void bearbeiteBuchung(List<Integer> itempreisID,HashMap<Item, Integer> itemlist, User user,int summe,String kommentar,Buchungstyp typ, int buchungID) {
-		
-		
-		Connection con = null;
-		PreparedStatement stmt = null;
-		
-		if(typ.equals("STRICHE") || typ.equals("ABBUCHUNG")) {
-			summe = summe * -1;
-		}
+        public static void bearbeiteBuchung(List<Integer> itempreisID,HashMap<Item, Integer> itemlist, User user,int summe,String kommentar,Buchungstyp typ, int buchungID) {
+
+
+                Connection con = null;
+                PreparedStatement stmt = null;
+
+                if(typ == Buchungstyp.STRICHE || typ == Buchungstyp.ABBUCHUNG) {
+                        summe = summe * -1;
+                }
 		
 		
 		try {
